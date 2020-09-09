@@ -1,23 +1,237 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://playable_character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
 [ext_resource path="res://diamond_point.tscn" type="PackedScene" id=3]
+[ext_resource path="res://fonts/OpenSans-Bold.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://triangle_hole.tscn" type="PackedScene" id=5]
+[ext_resource path="res://enemy_triangle.tscn" type="PackedScene" id=6]
+[ext_resource path="res://fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://sounds/main.wav" type="AudioStream" id=8]
+[ext_resource path="res://sounds/point.wav" type="AudioStream" id=9]
+[ext_resource path="res://sounds/game_over.wav" type="AudioStream" id=10]
+[ext_resource path="res://imgs/space.jpg" type="Texture" id=11]
+[ext_resource path="res://game_over_hud.gd" type="Script" id=12]
+[ext_resource path="res://welcome_screen.gd" type="Script" id=13]
+[ext_resource path="res://dificulty_choser.gd" type="Script" id=14]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="DynamicFont" id=1]
+size = 75
+outline_color = Color( 0.0352941, 0.0352941, 0.0352941, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 30
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 60
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 20
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 20
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 23
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 23
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 23
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 35
+font_data = ExtResource( 4 )
+
+[sub_resource type="GDScript" id=9]
+
+[sub_resource type="DynamicFont" id=10]
+size = 40
+font_data = ExtResource( 4 )
 
 [node name="Main" type="Node2D"]
+z_index = 1
 script = ExtResource( 2 )
 Food = ExtResource( 3 )
+Hole = ExtResource( 5 )
+Triangle = ExtResource( 6 )
+
+[node name="game_over_hud" type="CanvasLayer" parent="."]
+script = ExtResource( 12 )
+
+[node name="game_over" type="Label" parent="game_over_hud"]
+visible = false
+margin_left = 419.799
+margin_top = 127.078
+margin_right = 636.799
+margin_bottom = 336.078
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.0627451, 0.0588235, 0.0588235, 1 )
+text = "Game
+Over"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="new_game" type="Button" parent="game_over_hud"]
+visible = false
+margin_left = 427.093
+margin_top = 407.294
+margin_right = 647.093
+margin_bottom = 455.294
+custom_fonts/font = SubResource( 2 )
+text = "Jugar de nuevo"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="welcome_screen" type="CanvasLayer" parent="."]
+script = ExtResource( 13 )
+
+[node name="game_name" type="Label" parent="welcome_screen"]
+margin_left = 371.246
+margin_top = 207.237
+margin_right = 700.246
+margin_bottom = 290.237
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Space eater"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="start_game" type="Button" parent="welcome_screen"]
+margin_left = 455.909
+margin_top = 360.727
+margin_right = 600.909
+margin_bottom = 414.727
+custom_fonts/font = SubResource( 4 )
+text = "Juego nuevo"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="difficulty_btn" type="Button" parent="welcome_screen"]
+margin_left = 477.629
+margin_top = 443.993
+margin_right = 578.629
+margin_bottom = 477.993
+custom_fonts/font = SubResource( 11 )
+text = "Dificultad"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="dificulty_choser" type="CanvasLayer" parent="welcome_screen"]
+script = ExtResource( 14 )
+
+[node name="difficulty_1" type="Button" parent="welcome_screen/dificulty_choser"]
+visible = false
+margin_left = 499.004
+margin_top = 339.263
+margin_right = 559.004
+margin_bottom = 377.263
+custom_fonts/font = SubResource( 5 )
+text = "Fácil"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="difficulty_2" type="Button" parent="welcome_screen/dificulty_choser"]
+visible = false
+margin_left = 487.231
+margin_top = 396.444
+margin_right = 566.231
+margin_bottom = 434.444
+custom_fonts/font = SubResource( 6 )
+text = "Media"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="difficulty_3" type="Button" parent="welcome_screen/dificulty_choser"]
+visible = false
+margin_left = 490.595
+margin_top = 453.625
+margin_right = 562.595
+margin_bottom = 491.625
+custom_fonts/font = SubResource( 7 )
+text = "Difícil"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="difficulty_label" type="Label" parent="welcome_screen/dificulty_choser"]
+visible = false
+margin_left = 440.502
+margin_top = 164.814
+margin_right = 612.502
+margin_bottom = 213.814
+custom_fonts/font = SubResource( 8 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Dificultad"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="playable_character" parent="." instance=ExtResource( 1 )]
-
-[node name="diamond_point" parent="." instance=ExtResource( 3 )]
+position = Vector2( -193.406, 230.406 )
+z_index = 1
 
 [node name="food_timer" type="Timer" parent="."]
 wait_time = 5.0
-autostart = true
-script = SubResource( 1 )
-[connection signal="body_entered" from="diamond_point" to="." method="_on_diamond_point_body_entered"]
-[connection signal="eaten" from="diamond_point" to="." method="_on_diamond_point_eaten"]
+script = SubResource( 9 )
+
+[node name="enemies_timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="score" type="Label" parent="."]
+visible = false
+margin_left = 7.16501
+margin_top = 1.48143
+margin_right = 47.165
+margin_bottom = 35.4814
+custom_fonts/font = SubResource( 10 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="background_music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+volume_db = -6.0
+autoplay = true
+
+[node name="point_gained" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
+volume_db = 3.0
+
+[node name="game_over_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 10 )
+
+[node name="background" type="Sprite" parent="."]
+position = Vector2( 514.691, 306.046 )
+scale = Vector2( 1.03296, 0.914639 )
+z_index = -10
+texture = ExtResource( 11 )
+[connection signal="pressed" from="game_over_hud/new_game" to="." method="_new_game"]
+[connection signal="pressed" from="welcome_screen/start_game" to="." method="_new_game"]
+[connection signal="pressed" from="welcome_screen/difficulty_btn" to="welcome_screen" method="_on_difficulty_btn_pressed"]
+[connection signal="pressed" from="welcome_screen/dificulty_choser/difficulty_1" to="welcome_screen" method="_on_difficulty_1_pressed"]
+[connection signal="pressed" from="welcome_screen/dificulty_choser/difficulty_2" to="welcome_screen" method="_on_difficulty_2_pressed"]
+[connection signal="pressed" from="welcome_screen/dificulty_choser/difficulty_3" to="welcome_screen" method="_on_difficulty_3_pressed"]
+[connection signal="hit" from="playable_character" to="." method="_on_playable_character_hit"]
 [connection signal="timeout" from="food_timer" to="." method="_on_food_timer_timeout"]
+[connection signal="timeout" from="enemies_timer" to="." method="_on_enemies_timer_timeout"]
